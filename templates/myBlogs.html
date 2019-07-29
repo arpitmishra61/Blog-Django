@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content  %}
+<style>
+    a {
+        cursor: pointer;
+    }
+</style>
+<div class="container mt-4 center">
+
+    <h1>My Blogs</h1>
+    <hr>
+</div>
+<div class="container mt-3 p-2">
+
+    <div class="card p-3">
+
+        <div class="row p-2">
+
+            {% for article in articles %}
+            <div class="col-md-4 p-2 ">
+                <div class="p-3 card">
+                    <div class="fas fa-right ">
+                        <a class="fas fa-times text-danger float-right mx-2 " data-toggle="modal"
+                            data-target="#exampleModalDelete"></a>
+
+                        <a class="fas fa-pen text-info float-right pen" data-toggle="modal"
+                            data-target="#exampleModalEdit"></a>
+                    </div>
+                    <br>
+                    <div style="border-bottom:1px solid rgb(228, 231, 228)">
+                        <h4 class="title">{{ article.title }}</h4>
+                        <p class="text-secondary float-right" style="font-size: 10px;margin-bottom:5px">
+                            {{article.date}}
+                        </p>
+                    </div>
+
+                    <p class="text-secondary py-2 des">{{ article.description }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="text-secondary text-capitalize">Do you really want to delete this blog.</p>
+            </div>
+            <div class="modal-footer">
+                <form action="{% url 'myBlogs' %} " method="GET"></form>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Yes</button>
+                <button type="button" class="btn btn-primary">No </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'myBlogs' %}" method="POST"></form>
+                <input type="text" class="form-control editTitle my-2" name="title" minlength="5">
+                <textarea name="description" id="" cols="30" rows="6" class="editDes form-control"
+                    minlength="10">{{ article.description}}</textarea>
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" data-dismiss="modal">Update</button>
+                <button type="button" class="btn btn-primary">Back </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

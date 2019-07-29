@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{%  block content %}
+
+<link rel="stylesheet" href="../static/css/login.css">
+
+<div class="container my-4">
+
+    <div class="container card p-3 mt-4 text-center" style="display: block">
+        <h3 class="text-danger">Sign-up</h3>
+        <hr>
+        <img src="../static/images/user.png" alt="" style="margin-top:-30px">
+        <form action="{% url 'signup'  %}" class="form-group px-4" , method="POST">
+            {% csrf_token %}
+            <input type="text" class="form-control my-2" placeholder="Full Name" name="name" required minlength="3">
+
+            <input type=" email" class="form-control my-2" placeholder="Email" name="email" required minlength="3">
+
+            <input type="text" class="form-control my-2" placeholder="Usename" name="username" required minlength="3">
+
+            <input type="number" class="form-control my-2" placeholder="Mobile" name="mobile" required minlength="8">
+
+            <input type="password" class="form-control my-2" placeholder="Password" name="password" required
+                minlength="5">
+
+            <input type="password" class="form-control my-2" placeholder="Confirm password" name='cpassword' required
+                minlength="5">
+
+
+            <button class="btn btn-outline-primary">Submit</button>
+            <p class="text-secondary mt-2">Already registered? Then <a href="{% url 'login' %}">login</a> </p>
+        </form>
+
+
+
+    </div>
+</div>
+
+{% endblock %}
